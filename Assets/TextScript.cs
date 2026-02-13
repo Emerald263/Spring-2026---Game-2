@@ -18,8 +18,7 @@ public class TextScript : MonoBehaviour
     [SerializeField] List<Text> moveTexts;
     [SerializeField] List<Text> moves;
 
-    [SerializeField] Text descriptionF;
-    [SerializeField] Text descriptionH;
+
 
     public void SetDialogue(string dialogue)
     {

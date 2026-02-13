@@ -43,8 +43,7 @@ public class BattleManager : MonoBehaviour
     private void Start()
     {
 
-        soundEffects = GetComponent<AudioSource>();
-        anim = GetComponent<Animator>();
+
 
         dialogueBox.EnableActionSelector(false);
         dialogueBox.EnableMoveSelector(false);
@@ -68,22 +67,14 @@ public class BattleManager : MonoBehaviour
             HandleActionSelection();
 
         }
-        else if (state == Battlestates.PlayerAction)
-        {
-
-            Action();
-
-        }
-
-
+ 
         if (Input.GetKeyDown(KeyCode.L))
         {
 
             
         }
 
-        anim.SetBool("Frostattck", attck);
-        anim.SetBool("Frostidl", idle);
+
 
     }
     void HandleActionSelection()
@@ -138,12 +129,12 @@ public class BattleManager : MonoBehaviour
         dialogueBox.EnableActionSelector(false);
         dialogueBox.EnableDialogueText(false);
         dialogueBox.EnableMoveSelector(true);
-        HandleMoveSelection();
-        idle = true;
+        HandleMovementSelection();
+    
 
     }
 
-    void HandleMoveSelection()
+    void HandleMovementSelection()
     {
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -198,8 +189,7 @@ public class BattleManager : MonoBehaviour
         yield return StartCoroutine(dialogueBox.TypeDialogue($"Attacked"));
         yield return new WaitForSeconds(5f);
         {
-            idle = false;
-            attck = true;
+
 
 
 
@@ -214,8 +204,7 @@ public class BattleManager : MonoBehaviour
         yield return StartCoroutine(dialogueBox.TypeDialogue($"Boom"));
         yield return new WaitForSeconds(5f);
         {
-            idle = false;
-            attck = true;
+
 
 
 
@@ -265,7 +254,7 @@ public class BattleManager : MonoBehaviour
     {
 
 
-        yield return StartCoroutine(dialogueBox.TypeDialogue($"Wild Tree Crawlers appeared"));
+        yield return StartCoroutine(dialogueBox.TypeDialogue($"Parasite"));
         yield return new WaitForSeconds(1f);
 
         Playeraction();
