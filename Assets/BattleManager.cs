@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class BattleManager : MonoBehaviour
 {
 
+
     //audio variables
     public AudioSource soundEffects;
     public AudioClip[] sounds; // Public variable to access the Audio Source component
@@ -22,11 +23,15 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] TextScript dialogueBox;
 
+    [SerializeField] GameObject PlayerIdle;
+    [SerializeField] GameObject FlowerIdle;
+    [SerializeField] GameObject FlowerAttack;
 
     public enum Battlestates
     {
         Start,
         PlayerAction,
+        PlayerMove,
         EnemyMove,
         Busy,
 
@@ -67,7 +72,14 @@ public class BattleManager : MonoBehaviour
             HandleActionSelection();
 
         }
- 
+
+        if (state == Battlestates.PlayerMove)
+        {
+
+            HandleMovementSelection();
+
+        }
+
         if (Input.GetKeyDown(KeyCode.L))
         {
 
@@ -79,6 +91,7 @@ public class BattleManager : MonoBehaviour
     }
     void HandleActionSelection()
     {
+
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -125,7 +138,7 @@ public class BattleManager : MonoBehaviour
     void Action()
     {
         Debug.Log("Action");
-        state = Battlestates.PlayerAction;
+        state = Battlestates.PlayerMove;
         dialogueBox.EnableActionSelector(false);
         dialogueBox.EnableDialogueText(false);
         dialogueBox.EnableMoveSelector(true);
@@ -228,7 +241,7 @@ public class BattleManager : MonoBehaviour
 
     public IEnumerator EnemyAttack()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
 
             yield return StartCoroutine(dialogueBox.TypeDialogue($"The Enemy Attacked"));
@@ -238,7 +251,7 @@ public class BattleManager : MonoBehaviour
 
         }
 
-        Action();
+        Playeraction();
 
     }
 
